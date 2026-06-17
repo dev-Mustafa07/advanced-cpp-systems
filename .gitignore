@@ -1,0 +1,13 @@
+# Compiled binaries
+*.exe
+*.out
+*.o
+*.obj
+
+# Editor / tool leftovers
+tempCodeRunnerFile.cpp
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db
