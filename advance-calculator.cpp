@@ -2,7 +2,7 @@
 #include <cmath>
 #include <vector>
 
-void vectorcollector(std::vector<int>& vec)
+void vectorcollector(std::vector<float>& vec)
 {
     int tempnum;                  // Variable, that store the number and push in Vector.
     char user;                    // Variable, to whether add more numbers or not?
@@ -16,7 +16,7 @@ void vectorcollector(std::vector<int>& vec)
     } while (user == 'y' || user == 'Y');
 }
 
-void decimaladd(std::vector<int>& vec)
+void decimaladd(std::vector<float>& vec)
 {
     int sum = 0;
     for(int i : vec){
@@ -24,7 +24,7 @@ void decimaladd(std::vector<int>& vec)
     } 
     std::cout << sum << "\n";
 }
-void decimalminus(std::vector<int>& vec)
+void decimalminus(std::vector<float>& vec)
 {
     int minus = vec[0];
     for(int i = 1; i < vec.size(); i++){
@@ -33,16 +33,16 @@ void decimalminus(std::vector<int>& vec)
     } 
     std::cout << minus << "\n";
 }
-void decimaldivide(std::vector<int>& vec)
+void decimaldivide(std::vector<float>& vec)
 {
-    int product = 1;
-    for(int i : vec){
-        product *=  i;
+    double divided = vec[0];
+    for(int i = 1; i < vec.size(); i++){
+        divided /=  vec[i];
+        // minus = minus * -1;
     } 
-    // minus = minus * -1;
-    std::cout << product << "\n";
+    std::cout << divided << "\n";
 }
-void decimalmultiply(std::vector<int>& vec)
+void decimalmultiply(std::vector<float>& vec)
 {
     int product = 1;
     for(int i : vec){
@@ -98,25 +98,25 @@ int main()
             } while (userchoicedecimal >= 5);
             if (userchoicedecimal == 1)
             { // Add
-                std::vector<int> vec;
+                std::vector<float> vec;
                 vectorcollector(vec);
                 decimaladd(vec);
             }
             else if (userchoicedecimal == 2)
             { // Subtraction
-                std::vector<int> vec;
+                std::vector<float> vec;
                 vectorcollector(vec);
                 decimalminus(vec);
             }
             else if (userchoicedecimal == 3)
             { // Division
-                std::vector<int> vec;
+                std::vector<float> vec;
                 vectorcollector(vec);
                 decimaldivide(vec);
             }
             else if (userchoicedecimal == 4)
             { // Multipication
-                std::vector<int> vec;
+                std::vector<float> vec;
                 vectorcollector(vec);
                 decimalmultiply(vec);
             }
