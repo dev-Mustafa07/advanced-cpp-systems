@@ -2,36 +2,54 @@
 #include <cmath>
 #include <vector>
 
-int vectorcollector(std::vector<int>& vec)
+void vectorcollector(std::vector<int>& vec)
 {
-    std::vector<int> decimalnums; // Store decimal numbers.
     int tempnum;                  // Variable, that store the number and push in Vector.
     char user;                    // Variable, to whether add more numbers or not?
     do
     {
-        std::cout << "Enter Number: ";
+        std::cout << "Enter Number to perform operation: ";
         std::cin >> tempnum;
-        decimalnums.push_back(tempnum);
+        vec.push_back(tempnum);
         std::cout << "Do you want to enter more numbers(y/n): ";
         std::cin >> user;
     } while (user == 'y' || user == 'Y');
 }
 
-int decimaladd(std::vector<int>& vec)
+void decimaladd(std::vector<int>& vec)
 {
+    int sum = 0;
+    for(int i : vec){
+        sum += i;
+    } 
+    std::cout << sum << "\n";
 }
-int decimalminus(std::vector<int>& vec)
+void decimalminus(std::vector<int>& vec)
 {
-    std::vector<int> decimalnums; // Store decimal numbers.
-    int tempnum;                  // Variable, that store the number and push in Vector.
+    int minus = vec[0];
+    for(int i = 1; i < vec.size(); i++){
+        minus -=  vec[i];
+        // minus = minus * -1;
+    } 
+    std::cout << minus << "\n";
 }
-int decimaldivide(std::vector<int>& vec)
+void decimaldivide(std::vector<int>& vec)
 {
-    std::vector<int> decimalnums; // Store decimal numbers.
-    int tempnum;                  // Variable, that store the number and push in Vector.
+    int product = 1;
+    for(int i : vec){
+        product *=  i;
+    } 
+    // minus = minus * -1;
+    std::cout << product << "\n";
 }
-int decimalmultiply(std::vector<int>& vec)
+void decimalmultiply(std::vector<int>& vec)
 {
+    int product = 1;
+    for(int i : vec){
+        product *=  i;
+    } 
+    // minus = minus * -1;
+    std::cout << product << "\n";
 }
 
 int main()
@@ -68,7 +86,7 @@ int main()
         if (usermodechoice == 1)
         {
             int userchoicedecimal;
-            std::cout << "Enter which Arthemetic Operation You want to perform: ";
+            std::cout << "Enter which Arthemetic Operation You want to perform: \n";
             std::cout << "1. for ADDITION(+)\n";
             std::cout << "2. for SUBTRACTION(-)\n";
             std::cout << "3. for DIVISION(/)\n";
@@ -77,8 +95,8 @@ int main()
             {
                 std::cout << "Enter number: ";
                 std::cin >> userchoicedecimal;
-            } while (usermodechoice >= 3);
-            if (usermodechoice == 1)
+            } while (userchoicedecimal >= 5);
+            if (userchoicedecimal == 1)
             { // Add
                 std::vector<int> vec;
                 vectorcollector(vec);
