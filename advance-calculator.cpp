@@ -135,7 +135,7 @@ int binaryminus(std::vector<int> &vec)
     bool isnegative = false;
     int minus = vec[0];
 
-    for (int i = 1; i < vec.size() ; i++) // Subtracting Numbers
+    for (int i = 1; i < vec.size(); i++) // Subtracting Numbers
     {
         minus -= vec[i];
     }
@@ -144,6 +144,11 @@ int binaryminus(std::vector<int> &vec)
     {
         isnegative = true;
         minus *= -1;
+    }
+
+    if (minus == 0)
+    {
+        binarybits.push_back(0);
     }
 
     int tempnum;
@@ -171,10 +176,9 @@ int binaryminus(std::vector<int> &vec)
             std::cout << binarybits[i];
         }
         return 0;
-
     }
 }
-int binarydivide(std::vector<int> &vec, int &divided)
+int binarydivide(std::vector<int> &vec)
 {
     for (int i = 0; i < vec.size(); i++)
     {
@@ -184,11 +188,32 @@ int binarydivide(std::vector<int> &vec, int &divided)
             return 0;
         }
     }
-    for (int i = 1; i < vec.size(); i++)
+    std::vector<int> binarybits;
+    int divide = vec[0];
+
+    for (int i = 1; i < vec.size(); i++) // Subtracting Numbers
     {
-        divided /= vec[i];
+        divide /= vec[i];
     }
-    std::cout << divided << "\n";
+
+    if (divide == 0)
+    {
+        binarybits.push_back(0);
+    }
+
+    int tempnum;
+    while (divide > 0)
+    {
+        tempnum = divide % 2;
+        divide /= 2;
+        binarybits.push_back(tempnum);
+    }
+
+    std::cout << "Output is: ";
+    for (int i = binarybits.size() - 1; i >= 0; i--)
+    {
+        std::cout << binarybits[i];
+    }
     return 0;
 }
 void binarymultiply(std::vector<int> &vec, int &product)
@@ -307,13 +332,9 @@ int main()
             {                          // Division
                 std::vector<int> vec;  // Store Binary numbers
                 std::vector<int> vec2; // Store Decimal numbers
-                std::vector<int> vec3; // Store Final Decimal Bits
                 binarynumscollector(vec);
                 binarytodecimal(vec, vec2);
-                int decimaldivide = vec[0];
-                binarydivide(vec2, decimaldivide);
-                decimaltobinary(decimaldivide, vec3);
-                decimalbitsprinter(vec3);
+                binarydivide(vec2);
             }
             else if (userchoicebinary == 4)
             {                          // Multipication
