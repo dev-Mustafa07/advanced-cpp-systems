@@ -131,34 +131,48 @@ void binaryadd(std::vector<int> &vec, int &sum)
 }
 int binaryminus(std::vector<int> &vec)
 {
+    std::vector<int> binarybits;
+    bool isnegative = false;
     int minus = vec[0];
-    for (int i = 1; i < vec.size() - 1; i++)
+
+    for (int i = 1; i < vec.size() ; i++) // Subtracting Numbers
     {
         minus -= vec[i];
     }
 
     if (minus < 0)
     {
-        std::cout << "Output is: ";
-        for (int i = vec.size() - 1; i >= 0; i--)
-        {
-            std::cout << "-" << vec[i];
-        }
-        return 0;
-    }
-    for (int i = vec.size() - 1; i >= 0; i--)
-    {
-        std::cout << "Output is: " << vec[i];
+        isnegative = true;
+        minus *= -1;
     }
 
-    long long int tempnum;
-    while (minus > 0) // Converting Binary no into Decimal no
+    int tempnum;
+    while (minus > 0)
     {
         tempnum = minus % 2;
         minus /= 2;
-        vec.push_back(tempnum);
+        binarybits.push_back(tempnum);
     }
-    return 0;
+
+    if (isnegative)
+    {
+        std::cout << "Output is: -";
+        for (int i = binarybits.size() - 1; i >= 0; i--)
+        {
+            std::cout << binarybits[i];
+        }
+        return 0;
+    }
+    else
+    {
+        std::cout << "Output is: ";
+        for (int i = binarybits.size() - 1; i >= 0; i--)
+        {
+            std::cout << binarybits[i];
+        }
+        return 0;
+
+    }
 }
 int binarydivide(std::vector<int> &vec, int &divided)
 {
