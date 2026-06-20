@@ -68,8 +68,8 @@ void decimalmultiply(std::vector<float> &vec)
 
 void binarynumscollector(std::vector<int> &vec)
 {
-    double tempnum; // Variable, that store the number and push in Vector.
-    char user;      // Variable, to whether add more numbers or not?
+    long long int tempnum; // Variable, that store the number and push in Vector.
+    char user;             // Variable, to whether add more numbers or not?
     do
     {
         std::cout << "Enter Number to perform operation: ";
@@ -87,7 +87,8 @@ void binarytodecimal(std::vector<int> &vec, std::vector<int> &vec2)
     {
         int exp = 0;
 
-        int arrayno, singleno = 0, ans = 0;
+        int arrayno, singleno = 0;
+        long long ans = 0;
         arrayno = vec[j];
         while (arrayno > 0)
         {
@@ -101,20 +102,21 @@ void binarytodecimal(std::vector<int> &vec, std::vector<int> &vec2)
         vec2.push_back(ans); // Storing converted decimal no in decimalarray
     }
 }
-void decimaltobinary(int sum, std::vector<int> &vec)
+void decimaltobinary(int num, std::vector<int> &vec)
 {
-    int tempnum;
-    while (sum > 0) // Converting Binary no into Decimal no
+    long long int tempnum;
+    while (num > 0) // Converting Binary no into Decimal no
     {
-        tempnum = sum % 2;
-        sum /= 2;
+        tempnum = num % 2;
+        num /= 2;
         vec.push_back(tempnum);
     }
 }
 
 void decimalbitsprinter(std::vector<int> &vec3)
 {
-    for (int i = vec3.size() - 1; i > 0; i--)
+    std::cout << "Output is: ";
+    for (int i = vec3.size() - 1; i >= 0; i--)
     {
         std::cout << vec3[i];
     }
@@ -127,16 +129,38 @@ void binaryadd(std::vector<int> &vec, int &sum)
         sum += i;
     }
 }
-void binaryminus(std::vector<int> &vec)
+int binaryminus(std::vector<int> &vec)
 {
     int minus = vec[0];
-    for (int i = 1; i < vec.size(); i++)
+    for (int i = 1; i < vec.size() - 1; i++)
     {
         minus -= vec[i];
     }
-    std::cout << minus << "\n";
+
+    if (minus < 0)
+    {
+        std::cout << "Output is: ";
+        for (int i = vec.size() - 1; i >= 0; i--)
+        {
+            std::cout << "-" << vec[i];
+        }
+        return 0;
+    }
+    for (int i = vec.size() - 1; i >= 0; i--)
+    {
+        std::cout << "Output is: " << vec[i];
+    }
+
+    long long int tempnum;
+    while (minus > 0) // Converting Binary no into Decimal no
+    {
+        tempnum = minus % 2;
+        minus /= 2;
+        vec.push_back(tempnum);
+    }
+    return 0;
 }
-int binarydivide(std::vector<int> &vec)
+int binarydivide(std::vector<int> &vec, int &divided)
 {
     for (int i = 0; i < vec.size(); i++)
     {
@@ -146,7 +170,6 @@ int binarydivide(std::vector<int> &vec)
             return 0;
         }
     }
-    int divided = vec[0];
     for (int i = 1; i < vec.size(); i++)
     {
         divided /= vec[i];
@@ -154,15 +177,13 @@ int binarydivide(std::vector<int> &vec)
     std::cout << divided << "\n";
     return 0;
 }
-void binarymultiply(std::vector<int> &vec)
+void binarymultiply(std::vector<int> &vec, int &product)
 {
-    int product = 1;
     for (int i : vec)
     {
         product *= i;
     }
     // minus = minus * -1;
-    std::cout << product << "\n";
 }
 
 int main()
@@ -247,7 +268,7 @@ int main()
             {
                 std::cout << "Enter number: ";
                 std::cin >> userchoicebinary;
-            } while (userchoicebinary >= 5);
+            } while (userchoicebinary >= 5 && userchoicebinary > 0);
             if (userchoicebinary == 1)
             {                          // Add
                 std::vector<int> vec;  // Store Binary numbers
@@ -261,44 +282,40 @@ int main()
                 decimalbitsprinter(vec3);
             }
             else if (userchoicebinary == 2)
-            { // Subtraction
+            {                          // Subtraction
                 std::vector<int> vec;  // Store Binary numbers
                 std::vector<int> vec2; // Store Decimal numbers
-                std::vector<int> vec3; // Store Final Decimal Bits
-                int decimalsum = 0;
                 binarynumscollector(vec);
                 binarytodecimal(vec, vec2);
-                // binaryminus(vec2, decimalsum);
-                decimaltobinary(decimalsum, vec3);
-                decimalbitsprinter(vec3);
+                binaryminus(vec2);
             }
             else if (userchoicebinary == 3)
-            { // Division
+            {                          // Division
                 std::vector<int> vec;  // Store Binary numbers
                 std::vector<int> vec2; // Store Decimal numbers
                 std::vector<int> vec3; // Store Final Decimal Bits
-                int decimalsum = 0;
                 binarynumscollector(vec);
                 binarytodecimal(vec, vec2);
-                // binarydivide(vec2, decimalsum);
-                decimaltobinary(decimalsum, vec3);
+                int decimaldivide = vec[0];
+                binarydivide(vec2, decimaldivide);
+                decimaltobinary(decimaldivide, vec3);
                 decimalbitsprinter(vec3);
             }
             else if (userchoicebinary == 4)
-            { // Multipication
+            {                          // Multipication
                 std::vector<int> vec;  // Store Binary numbers
                 std::vector<int> vec2; // Store Decimal numbers
                 std::vector<int> vec3; // Store Final Decimal Bits
-                int decimalsum = 0;
+                int decimalmultiply = 1;
                 binarynumscollector(vec);
                 binarytodecimal(vec, vec2);
-                // binarymultiply(vec2, decimalsum);
-                decimaltobinary(decimalsum, vec3);
+                binarymultiply(vec2, decimalmultiply);
+                decimaltobinary(decimalmultiply, vec3);
                 decimalbitsprinter(vec3);
             }
         }
 
-        std::cout << "Do you want more Maths?(y/n): ";
+        std::cout << "\nDo you want more Maths?(y/n): ";
         std::cin >> userchoice;
     } while (userchoice == 'y' || userchoice == 'Y');
     std::cout << "Thanks! for using our Advance Scientific Calculator";
