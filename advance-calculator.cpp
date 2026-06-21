@@ -124,7 +124,7 @@ void binarytodecimal(std::vector<long long int> &vec, std::vector<long long int>
         vec2.push_back(ans); // Storing converted decimal no in decimalarray
     }
 }
-void decimaltobinary(int num, std::vector<int> &vec)
+void decimaltobinary(long long num, std::vector<int> &vec)
 {
     long long int tempnum;
     while (num > 0) // Converting Binary no into Decimal no
@@ -143,7 +143,7 @@ void decimalbitsprinter(std::vector<int> &vec3)
         std::cout << vec3[i];
     }
 }
-
+ 
 void binaryadd(std::vector<long long int> &vec, long long int &sum)
 {
     for (long long i : vec)
@@ -464,7 +464,6 @@ int main()
                 std::vector<int> vec3; // Store Final Decimal Bits
                 long long int decimalsum = 0;
                 binarynumscollector(vec);
-                // binarytodecimal(vec, vec2);
                 binaryadd(vec, decimalsum);
                 decimaltobinary(decimalsum, vec3);
                 decimalbitsprinter(vec3);
