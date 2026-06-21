@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <string>
 
 void vectorcollector(std::vector<float> &vec)
 {
@@ -66,29 +67,50 @@ void decimalmultiply(std::vector<float> &vec)
 
 // Binary Operations:
 
-void binarynumscollector(std::vector<int> &vec)
+void binarynumscollector(std::vector<long long int> &vec)
 {
-    long long int tempnum; // Variable, that store the number and push in Vector.
+    std::string tempnum; // Variable, that store the number and push in Vector.
     char user;             // Variable, to whether add more numbers or not?
     do
     {
         std::cout << "Enter Number to perform operation: ";
         std::cin >> tempnum;
-        vec.push_back(tempnum);
+
+        bool valid = true;
+        for (char ch : tempnum)
+        {
+            if (ch != '0' && ch != '1')
+            {
+                valid = false;
+                break;
+            }
+        }
+        if (!valid)
+        {
+            std::cout << "Invalid binary number! Sirf 0/1 likhein.\n";
+            continue;
+        }
+
+        long long decimalvalue = 0;
+        for (char ch : tempnum)
+        {
+            decimalvalue = decimalvalue * 2 + (ch - '0');
+        }
+        vec.push_back(decimalvalue);
         std::cout << "Do you want to enter more binary numbers(y/n): ";
         std::cin >> user;
     } while (user == 'y' || user == 'Y');
 }
 
-void binarytodecimal(std::vector<int> &vec, std::vector<int> &vec2)
+void binarytodecimal(std::vector<long long int> &vec, std::vector<long long int> &vec2)
 {
     int j;
     for (j = 0; j < vec.size(); j++) // Converting binary no in decimal
     {
         int exp = 0;
 
-        int arrayno, singleno = 0;
-        long long ans = 0;
+        long long int arrayno = 0, singleno = 0;
+        long long int ans = 0;
         arrayno = vec[j];
         while (arrayno > 0)
         {
@@ -122,14 +144,14 @@ void decimalbitsprinter(std::vector<int> &vec3)
     }
 }
 
-void binaryadd(std::vector<int> &vec, int &sum)
+void binaryadd(std::vector<long long int> &vec, long long int &sum)
 {
-    for (int i : vec)
+    for (long long i : vec)
     {
         sum += i;
     }
 }
-int binaryminus(std::vector<int> &vec)
+int binaryminus(std::vector<long long int> &vec)
 {
     std::vector<int> binarybits;
     bool isnegative = false;
@@ -178,7 +200,7 @@ int binaryminus(std::vector<int> &vec)
         return 0;
     }
 }
-int binarydivide(std::vector<int> &vec)
+int binarydivide(std::vector<long long int> &vec)
 {
     for (int i = 0; i < vec.size(); i++)
     {
@@ -216,7 +238,7 @@ int binarydivide(std::vector<int> &vec)
     }
     return 0;
 }
-void binarymultiply(std::vector<int> &vec, int &product)
+void binarymultiply(std::vector<long long int> &vec,long long int &product)
 {
     for (int i : vec)
     {
@@ -236,6 +258,7 @@ void pietodegree(float &angle)
 {
     long double PI = 3.14159265358979323846;
     angle = angle * (180 / PI);
+    std::cout << "\nOutput is: " << angle;
 }
 
 
@@ -254,17 +277,17 @@ void calcuatetan(float angle)
     angle = tan(angle);
     std::cout << "\nOutput is: " << angle;
 }
-void calcuateinversesin(float angle)
+void calcuateinversesin(float &angle)
 {
     angle = 1 / (sin(angle));
     std::cout << "\nOutput is: " << angle;
 }
-void calcuateinversecos(float angle)
+void calcuateinversecos(float &angle)
 {
     angle = 1 / (cos(angle));
     std::cout << "\nOutput is: " << angle;
 }
-void calcuateinversetan(float angle)
+void calcuateinversetan(float &angle)
 {
     angle = 1 / (tan(angle));
     std::cout << "\nOutput is: " << angle;
@@ -359,9 +382,9 @@ int main()
                 std::cout << "\n1. for SINE (sin)";
                 std::cout << "\n2. for COSINE (cos)";
                 std::cout << "\n3. for TANGENT (tan)";
-                std::cout << "\n4. for arcsin (inverse of sin)";
-                std::cout << "\n5. for arccos (inverse of cos)";
-                std::cout << "\n6. for arctan (inverse of tan)\n";
+                std::cout << "\n4. for COSECANT (csc - Multiplicative Inverse of sin)";
+                std::cout << "\n5. for SECANT (sec - Multiplicative Inverse of cos)";
+                std::cout << "\n6. for COTANGENT (cot - Multiplicative Inverse of tan)\n";
                 do
                 {
                     std::cout << "\nEnter Number: ";
@@ -394,10 +417,11 @@ int main()
                 else if (usertrigonometrictype == 4)
                 {
                     float angle;
-                    std::cout << "Enter ratio in (1 to -1): ";
+                    std::cout << "Enter angle in Degrees: ";
                     std::cin >> angle;
+                    degreetopie(angle);
                     calcuateinversesin(angle);
-                    pietodegree(angle);
+                    // pietodegree(angle);
                 }
                 else if (usertrigonometrictype == 5)
                 {
@@ -406,6 +430,7 @@ int main()
                     std::cin >> angle;
                     degreetopie(angle);
                     calcuateinversecos(angle);
+                    // pietodegree(angle);
                 }
                 else if (usertrigonometrictype == 6)
                 {
@@ -413,7 +438,8 @@ int main()
                     std::cout << "Enter angle in Degrees: ";
                     std::cin >> angle;
                     degreetopie(angle);
-                    calcuateinversesin(angle);
+                    calcuateinversetan(angle);
+                    // pietodegree(angle);
                 }
             }
         }
@@ -433,38 +459,38 @@ int main()
             } while (userchoicebinary >= 5 || userchoicebinary < 0);
             if (userchoicebinary == 1)
             {                          // Add
-                std::vector<int> vec;  // Store Binary numbers
-                std::vector<int> vec2; // Store Decimal numbers
+                std::vector<long long int> vec;  // Store Binary numbers
+                std::vector<long long int> vec2; // Store Decimal numbers
                 std::vector<int> vec3; // Store Final Decimal Bits
-                int decimalsum = 0;
+                long long int decimalsum = 0;
                 binarynumscollector(vec);
-                binarytodecimal(vec, vec2);
-                binaryadd(vec2, decimalsum);
+                // binarytodecimal(vec, vec2);
+                binaryadd(vec, decimalsum);
                 decimaltobinary(decimalsum, vec3);
                 decimalbitsprinter(vec3);
             }
             else if (userchoicebinary == 2)
             {                          // Subtraction
-                std::vector<int> vec;  // Store Binary numbers
-                std::vector<int> vec2; // Store Decimal numbers
+                std::vector<long long int> vec;  // Store Binary numbers
+                std::vector<long long int> vec2; // Store Decimal numbers
                 binarynumscollector(vec);
                 binarytodecimal(vec, vec2);
                 binaryminus(vec2);
             }
             else if (userchoicebinary == 3)
             {                          // Division
-                std::vector<int> vec;  // Store Binary numbers
-                std::vector<int> vec2; // Store Decimal numbers
+                std::vector<long long int> vec;  // Store Binary numbers
+                std::vector<long long int> vec2; // Store Decimal numbers
                 binarynumscollector(vec);
                 binarytodecimal(vec, vec2);
                 binarydivide(vec2);
             }
             else if (userchoicebinary == 4)
             {                          // Multipication
-                std::vector<int> vec;  // Store Binary numbers
-                std::vector<int> vec2; // Store Decimal numbers
+                std::vector<long long int> vec;  // Store Binary numbers
+                std::vector<long long int> vec2; // Store Decimal numbers
                 std::vector<int> vec3; // Store Final Decimal Bits
-                int decimalmultiply = 1;
+                long long int decimalmultiply = 1;
                 binarynumscollector(vec);
                 binarytodecimal(vec, vec2);
                 binarymultiply(vec2, decimalmultiply);
