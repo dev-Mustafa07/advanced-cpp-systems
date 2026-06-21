@@ -225,11 +225,58 @@ void binarymultiply(std::vector<int> &vec, int &product)
     // minus = minus * -1;
 }
 
+// Trignometric Ratios
+
+void degreetopie(float &angle)
+{
+    long double PI = 3.14159265358979323846;
+    angle = angle * (PI / 180);
+}
+void pietodegree(float &angle)
+{
+    long double PI = 3.14159265358979323846;
+    angle = angle * (180 / PI);
+}
+
+
+void calcuatesin(float angle)
+{
+    angle = sin(angle);
+    std::cout << "\nOutput is: " << angle;
+}
+void calcuatecos(float angle)
+{
+    angle = cos(angle);
+    std::cout << "\nOutput is: " << angle;
+}
+void calcuatetan(float angle)
+{
+    angle = tan(angle);
+    std::cout << "\nOutput is: " << angle;
+}
+void calcuateinversesin(float angle)
+{
+    angle = 1 / (sin(angle));
+    std::cout << "\nOutput is: " << angle;
+}
+void calcuateinversecos(float angle)
+{
+    angle = 1 / (cos(angle));
+    std::cout << "\nOutput is: " << angle;
+}
+void calcuateinversetan(float angle)
+{
+    angle = 1 / (tan(angle));
+    std::cout << "\nOutput is: " << angle;
+}
+
 int main()
 {
-    std::cout << "=============================================\n";
-    std::cout << "\tAdvance Scientific Calculator\n";
-    std::cout << "=============================================\n";
+    {
+        std::cout << "=============================================\n";
+        std::cout << "\tAdvance Scientific Calculator\n";
+        std::cout << "=============================================\n";
+    }
     char userchoice; // For loop whether program should continue or not!
     do
     {
@@ -245,7 +292,7 @@ int main()
 
         if (usermodechoice == 1)
         {
-            std::cout << "User choose Decimal Number System(0-9)\n";
+            std::cout << "\nUser choose Decimal Number System(0-9)\n";
         }
         else if (usermodechoice == 2)
         {
@@ -256,49 +303,125 @@ int main()
             std::cout << "Please Enter Valid number!\n";
         }
 
-        if (usermodechoice == 1)
+        if (usermodechoice == 1) // Decimal Operations
         {
-            int userchoicedecimal;
-            std::cout << "Enter which Arthemetic Operation You want to perform: \n";
-            std::cout << "1. for ADDITION(+)\n";
-            std::cout << "2. for SUBTRACTION(-)\n";
-            std::cout << "3. for DIVISION(/)\n";
-            std::cout << "4. for MULTIPICATION(x)\n";
+            int userchoiceperationtype;
+            std::cout << "Enter the type of operation: \n";
+            std::cout << "1. for Standard Arithmetic Operations(+, -, /, x)\n";
+            std::cout << "2. for Trigonometric Ratios (Sin(), Cos(), tan(), and inverse of them)\n";
             do
             {
-                std::cout << "Enter number: ";
-                std::cin >> userchoicedecimal;
-            } while (userchoicedecimal >= 5);
-            if (userchoicedecimal == 1)
-            { // Add
-                std::vector<float> vec;
-                vectorcollector(vec);
-                decimaladd(vec);
+                std::cout << "Enter Number: ";
+                std::cin >> userchoiceperationtype;
+            } while (userchoiceperationtype > 2 || userchoiceperationtype < 1);
+            if (userchoiceperationtype == 1)
+            {
+                int userchoicedecimal;
+                std::cout << "\nEnter which Arthemetic Operation You want to perform: \n";
+                std::cout << "1. for ADDITION(+)\n";
+                std::cout << "2. for SUBTRACTION(-)\n";
+                std::cout << "3. for DIVISION(/)\n";
+                std::cout << "4. for MULTIPICATION(x)\n";
+                do
+                {
+                    std::cout << "Enter number: ";
+                    std::cin >> userchoicedecimal;
+                } while (userchoicedecimal >= 5 || userchoicedecimal < 0);
+                if (userchoicedecimal == 1)
+                { // Add
+                    std::vector<float> vec;
+                    vectorcollector(vec);
+                    decimaladd(vec);
+                }
+                else if (userchoicedecimal == 2)
+                { // Subtraction
+                    std::vector<float> vec;
+                    vectorcollector(vec);
+                    decimalminus(vec);
+                }
+                else if (userchoicedecimal == 3)
+                { // Division
+                    std::vector<float> vec;
+                    vectorcollector(vec);
+                    decimaldivide(vec);
+                }
+                else if (userchoicedecimal == 4)
+                { // Multipication
+                    std::vector<float> vec;
+                    vectorcollector(vec);
+                    decimalmultiply(vec);
+                }
             }
-            else if (userchoicedecimal == 2)
-            { // Subtraction
-                std::vector<float> vec;
-                vectorcollector(vec);
-                decimalminus(vec);
-            }
-            else if (userchoicedecimal == 3)
-            { // Division
-                std::vector<float> vec;
-                vectorcollector(vec);
-                decimaldivide(vec);
-            }
-            else if (userchoicedecimal == 4)
-            { // Multipication
-                std::vector<float> vec;
-                vectorcollector(vec);
-                decimalmultiply(vec);
+            else if (userchoiceperationtype == 2)
+            {
+                int usertrigonometrictype;
+                std::cout << "\nSelect Trigonometric Ratios: ";
+                std::cout << "\n1. for SINE (sin)";
+                std::cout << "\n2. for COSINE (cos)";
+                std::cout << "\n3. for TANGENT (tan)";
+                std::cout << "\n4. for arcsin (inverse of sin)";
+                std::cout << "\n5. for arccos (inverse of cos)";
+                std::cout << "\n6. for arctan (inverse of tan)\n";
+                do
+                {
+                    std::cout << "\nEnter Number: ";
+                    std::cin >> usertrigonometrictype;
+                } while (usertrigonometrictype > 6 || usertrigonometrictype < 1);
+                if (usertrigonometrictype == 1)
+                {
+                    float angle;
+                    std::cout << "Enter angle in Degrees: ";
+                    std::cin >> angle;
+                    degreetopie(angle);
+                    calcuatesin(angle);
+                }
+                else if (usertrigonometrictype == 2)
+                {
+                    float angle;
+                    std::cout << "Enter angle in Degrees: ";
+                    std::cin >> angle;
+                    degreetopie(angle);
+                    calcuatecos(angle);
+                }
+                else if (usertrigonometrictype == 3)
+                {
+                    float angle;
+                    std::cout << "Enter angle in Degrees: ";
+                    std::cin >> angle;
+                    degreetopie(angle);
+                    calcuatetan(angle);
+                }
+                else if (usertrigonometrictype == 4)
+                {
+                    float angle;
+                    std::cout << "Enter ratio in (1 to -1): ";
+                    std::cin >> angle;
+                    calcuateinversesin(angle);
+                    pietodegree(angle);
+                }
+                else if (usertrigonometrictype == 5)
+                {
+                    float angle;
+                    std::cout << "Enter angle in Degrees: ";
+                    std::cin >> angle;
+                    degreetopie(angle);
+                    calcuateinversecos(angle);
+                }
+                else if (usertrigonometrictype == 6)
+                {
+                    float angle;
+                    std::cout << "Enter angle in Degrees: ";
+                    std::cin >> angle;
+                    degreetopie(angle);
+                    calcuateinversesin(angle);
+                }
             }
         }
-        else if (usermodechoice == 2)
+        else if (usermodechoice == 2) // Binary Operations
         {
 
             int userchoicebinary;
-            std::cout << "Enter which Arthemetic Operation You want to perform: \n";
+            std::cout << "\nEnter which Arthemetic Operation You want to perform: \n";
             std::cout << "1. for ADDITION(+)\n";
             std::cout << "2. for SUBTRACTION(-)\n";
             std::cout << "3. for DIVISION(/)\n";
@@ -307,7 +430,7 @@ int main()
             {
                 std::cout << "Enter number: ";
                 std::cin >> userchoicebinary;
-            } while (userchoicebinary >= 5 && userchoicebinary > 0);
+            } while (userchoicebinary >= 5 || userchoicebinary < 0);
             if (userchoicebinary == 1)
             {                          // Add
                 std::vector<int> vec;  // Store Binary numbers
